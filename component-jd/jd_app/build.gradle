@@ -1,0 +1,36 @@
+apply plugin: 'com.android.application'
+def configInfo = rootProject.ext.version
+def dependenciesInfo = rootProject.ext.dependencies
+android {
+    compileSdkVersion configInfo.compileSdkVersion
+    defaultConfig {
+        applicationId "com.rocketzly.jd_app"
+        minSdkVersion configInfo.minSdkVersion
+        targetSdkVersion configInfo.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner configInfo.testInstrumentationRunner
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation project(':common')
+    runtimeOnly project(':component-jd:jd')
+    implementation project(':component-jd:jd_api')
+    implementation project(':component_resident:resident_api')
+    annotationProcessor dependenciesInfo["arouter-compiler"]
+}

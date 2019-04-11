@@ -1,0 +1,21 @@
+//support 包的版本号
+def supportVersion = "28.0.0"
+
+ext {
+    //版本信息配置
+    version = [
+            "buildToolsVersion"        : "25.0.2",
+            "compileSdkVersion"        : 28,
+            "minSdkVersion"            : 15,
+            "targetSdkVersion"         : 28,
+            "testInstrumentationRunner": "android.support.test.runner.AndroidJUnitRunner"
+    ]
+    //support 包相关包的引用
+    dependencies = [
+            "appcompat-v7"     : "com.android.support:appcompat-v7:${supportVersion}",
+            "recyclerview-v7"  : "com.android.support:recyclerview-v7:${supportVersion}",
+            "constraint-layout": "com.android.support.constraint:constraint-layout:1.1.3",
+            "arouter-api"      : "com.alibaba:arouter-api:1.4.1",
+            "arouter-compiler" : "com.alibaba:arouter-compiler:1.2.2"
+    ]
+}

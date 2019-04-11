@@ -1,0 +1,14 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.rocketzly.resident">
+
+    <application android:allowBackup="true">
+
+        <provider
+            android:name=".ResidentInitProvider"
+            android:authorities="${applicationId}.ResidentInitProvider"
+            android:exported="false"
+            android:multiprocess="true"
+            android:initOrder="100"/>
+
+    </application>
+</manifest>

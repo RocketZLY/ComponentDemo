@@ -1,0 +1,1 @@
+include ':app', ':common', ':component-jd:jd', ':component-jd:jd_api', ':component-jd:jd_app', ':share', ':pay', ':component_resident:resident', ':component_resident:resident_api', ':component_resident:resident_app'
