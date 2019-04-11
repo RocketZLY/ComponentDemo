@@ -19,7 +19,7 @@ WTF！！！这么简单？
 
 
 
-#组件化架构图
+# 组件化架构图
 
 ![](http://rocketzly.androider.top/%E7%BB%84%E4%BB%B6%E5%8C%96%E6%9E%B6%E6%9E%84%E5%9B%BE.png)
 
@@ -76,7 +76,7 @@ dependencies {
 
 
 
-#模块如何单独运行
+# 模块如何单独运行
 
 模块要想单独运行只需要新建一个Application壳工程用来作为独立运行的入口，模块本身永远是library，然后壳工程依赖模块即可，那么一个模块的目录将变成如下这样：
 
@@ -119,7 +119,7 @@ dependencies {
 
 
 
-#拆成独立模块后初始化问题
+# 拆成独立模块后初始化问题
 
 初始化的逻辑我们可以细分为两类
 
@@ -346,7 +346,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-#模块独立运行时跨模块方法调用
+# 模块独立运行时跨模块方法调用
 
 同级模块有依赖的情况下，组合运行没问题，但是单独运行的时候由于没有对应模块提供接口实现，那么我们通过arouter没法拿到具体的实现，这个时候就需要mock数据了，而mock相关的操作是为了我们独立运行，所以写在独立运行的壳工程中。以jd模块为例，假设jd模块的运行需要依赖resident模块，那么jd_app就需要实现resident_api中jd需要的方法，以便jd模块独立运行的时候能够获取到resident的数据。
 
@@ -385,7 +385,7 @@ public class MockPayResultService implements PayResultService {
 
 - 组件化后有资源冲突的可能性所以命名还得规范，比如加前缀
 
-- ```groovy
+ ```groovy
   // Login 组件的 build.gradle
   android {
       resourcePrefix "login_"
@@ -395,11 +395,9 @@ public class MockPayResultService implements PayResultService {
 
   如果组件配置了 resourcePrefix ，其 xml 中定义的资源没有以 resourcePrefix 的值作为前缀的话，在对应的 xml 中定义的资源会报红。resourcePrefix 的值就是指定的组件中 xml 资源的前缀，不过没法约束图片命名需要自己注意。
 
-  
-
 - 代码隔离Gradle 3.0 提供了新的依赖方式 runtimeOnly ，通过 runtimeOnly 方式依赖时，依赖项仅在运行时对模块及其消费者可用，编译期间依赖项的代码对其消费者时完全隔离的，避免开发中直接引用到组件中类的问题
 
-- ```groovy
+ ```groovy
   // 主项目的 build.gradle
   dependencies {
       // 其他依赖 ...
