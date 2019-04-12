@@ -47,9 +47,9 @@ WTF！！！这么简单？
 
 ```groovy
 dependencies {
-    ...
-    implementation project(':component-jd:jd_api')
-  	...
+	...
+	implementation project(':component-jd:jd_api')
+	...
 }
 ```
 
@@ -57,10 +57,10 @@ dependencies {
 
 ```groovy
 dependencies {
-    ...
-    runtimeOnly project(':component-jd:jd')//runtimeOnly可以防止我们在写代码的时候直接引用到jd模块的类
-    implementation project(':component-jd:jd_api')
-  	...
+	...
+	runtimeOnly project(':component-jd:jd')//runtimeOnly可以防止我们在写代码的时候直接引用到jd模块的类
+	implementation project(':component-jd:jd_api')
+	...
 }
 ```
 
@@ -95,10 +95,10 @@ app模块是全量编译的application模块入口，module1是业务library模�
 
 ```groovy
 dependencies {
-  	...
-  	runtimeOnly project(':module1')
-    implementation project(':module1_api')
-  	...
+	...
+	runtimeOnly project(':module1')
+	implementation project(':module1_api')
+	...
 }
 ```
 
@@ -106,12 +106,12 @@ dependencies {
 
 ```groovy
 dependencies {
-  	...
-  	runtimeOnly project(':module1')
-    implementation project(':module1_api')
-    runtimeOnly project(':module2')
-    implementation project(':module2_api')
-  	...
+	...
+	runtimeOnly project(':module1')
+	implementation project(':module1_api')
+	runtimeOnly project(':module2')
+	implementation project(':module2_api')
+	...
 }
 ```
 
@@ -320,10 +320,10 @@ resident_app模块依赖对外暴露的resident_api和具体实现类resident
 
 ```groovy
 dependencies {
-  	...
-    runtimeOnly project(':component_resident:resident')
-    implementation project(':component_resident:resident_api')
-  	...
+	...
+	runtimeOnly project(':component_resident:resident')
+	implementation project(':component_resident:resident_api')
+	...
 }
 ```
 
@@ -354,11 +354,11 @@ Jd_app依赖关系如下
 
 ```groovy
 dependencies {  
-  	...
-		runtimeOnly project(':component-jd:jd')
-    implementation project(':component-jd:jd_api')
-    implementation project(':component_resident:resident_api')
-  	...
+	...
+	runtimeOnly project(':component-jd:jd')
+	implementation project(':component-jd:jd_api')
+	implementation project(':component_resident:resident_api')
+	...
 }
 ```
 
@@ -383,25 +383,25 @@ public class MockPayResultService implements PayResultService {
 
 # Tips
 
-- 组件化后有资源冲突的可能性所以命名还得规范，比如加前缀
+组件化后有资源冲突的可能性所以命名还得规范，比如加前缀
 
- ```groovy
-  // Login 组件的 build.gradle
-  android {
-      resourcePrefix "login_"
-      // 其他配置 ...
-  }
-  ```
+```groovy
+// Login 组件的 build.gradle
+android {
+    resourcePrefix "login_"
+    // 其他配置 ...
+}
+```
 
-  如果组件配置了 resourcePrefix ，其 xml 中定义的资源没有以 resourcePrefix 的值作为前缀的话，在对应的 xml 中定义的资源会报红。resourcePrefix 的值就是指定的组件中 xml 资源的前缀，不过没法约束图片命名需要自己注意。
+如果组件配置了 resourcePrefix ，其 xml 中定义的资源没有以 resourcePrefix 的值作为前缀的话，在对应的 xml 中定义的资源会报红。resourcePrefix 的值就是指定的组件中 xml 资源的前缀，不过没法约束图片命名需要自己注意。
 
-- 代码隔离Gradle 3.0 提供了新的依赖方式 runtimeOnly ，通过 runtimeOnly 方式依赖时，依赖项仅在运行时对模块及其消费者可用，编译期间依赖项的代码对其消费者时完全隔离的，避免开发中直接引用到组件中类的问题
+代码隔离Gradle 3.0 提供了新的依赖方式 runtimeOnly ，通过 runtimeOnly 方式依赖时，依赖项仅在运行时对模块及其消费者可用，编译期间依赖项的代码对其消费者时完全隔离的，避免开发中直接引用到组件中类的问题
 
- ```groovy
-  // 主项目的 build.gradle
-  dependencies {
-      // 其他依赖 ...
-      runtimeOnly project(':component-jd:jd')
-      implementation project(':component-jd:jd_api')
-  }
-  ```
+```groovy
+// 主项目的 build.gradle
+dependencies {
+    // 其他依赖 ...
+    runtimeOnly project(':component-jd:jd')
+    implementation project(':component-jd:jd_api')
+}
+```
